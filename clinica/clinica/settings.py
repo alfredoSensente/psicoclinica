@@ -81,6 +81,7 @@ DATABASES = {
         'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '',
+        #utilizaremos MariaDB como gestor de base de datos
     }
 }
 
