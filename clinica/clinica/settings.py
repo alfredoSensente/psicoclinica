@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cita.apps.CitaConfig',
     'paciente.apps.PacienteConfig',
+    'principal.apps.PrincipalConfig',
 ]
 
 MIDDLEWARE = [
