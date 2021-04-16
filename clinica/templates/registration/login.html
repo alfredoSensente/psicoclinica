@@ -1,0 +1,63 @@
+{% extends "layout_base.html"%}
+{% block link_css %} 
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'registration/css/style.css' %}">
+{% endblock %}
+{% block title %}Login{% endblock %}
+{% block body %}
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <h2 id="form-title">Clinica Vanegas</h2>
+            </div>
+            <div class="d-flex justify-content-center">
+                <h3 id="form-title">Login</h3>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                    <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                        <span class="input-group-text"><img src="{% static 'registration/icon/person.svg' %}" alt="person"></span>
+                        </div>
+                        {{ form.user.label_tag }}<!--si da problemas, cambiar user a username-->
+                        {{ form.username }}
+                    </div>
+                    
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                        <span class="input-group-text"><img src="{% static 'registration/icon/key.svg' %}" alt="key"></span>
+                    </div>
+                        {{ form.pass.label_tag }} <!--si da problemas, cambiar pass a password-->
+                        {{ form.password }}
+                    </div>
+        
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <input type="submit" value="login" class="btn login_btn"/>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </div>
+                    {% if form.errors %}
+                        <div class="d-flex justify-content-center mt-3 lg">
+                            <span class="input-group-text"><i class="Lost"></i><p>Usuario/contaseña incorrectos</p></span>
+                        </div>
+                    {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
