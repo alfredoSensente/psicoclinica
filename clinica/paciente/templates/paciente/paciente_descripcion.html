@@ -1,0 +1,82 @@
+{% extends "paciente/paciente_layout_base.html"%}
+{% block title %}Descripcion{% endblock %}
+{% load static %}
+{% block body %}
+    <br>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                <!--Tabla-->
+                {% if descripcion_paciente %}
+                <table class="table table-bordered table-hover table-dark text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Atributos</th>
+                        <th scope="col">Datos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                
+                        <tr>
+                            <th scope="row">No. Correlativo</th> 
+                            <td>{{descripcion_paciente.id_paciente}}</td>      
+                        </tr>
+                        <tr>
+                            <th scope="row">Nombre(s):</th>
+                            <td>{{descripcion_paciente.nombre}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Apellidos:</th>
+                            <td>{{descripcion_paciente.apellido}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Fecha de Nacimiento:</th> 
+                            <td>{{descripcion_paciente.fecha_nacimiento}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Departamento:</th>
+                            <td>{{descripcion_paciente.departamento}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Municipio:</th>
+                            <td>{{descripcion_paciente.municipio}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Direccion:</th>
+                            <td>{{descripcion_paciente.direccion}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Religión:</th>
+                            <td>{{descripcion_paciente.id_religion}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Estado Civil:</th>
+                            <td>{{descripcion_paciente.id_estado_civil}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Contacto:</th>
+                            <td>{{descripcion_paciente.id_numero_contacto}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Sexo:</th>
+                            <td>{{descripcion_paciente.id_sexo}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Acciones:</th>
+                            <td><a><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+                                
+                            </td>
+                        </tr>
+                {% else %}
+                    <h1 class="text-center">No hay pacientes registrados</h1>
+                {% endif %}
+                    </tbody>
+                </table>
+                <div class="row justify-content-md-center">
+                    <button type="button" class="button button2 "><a href="{% url 'paciente:paciente_index' %}" style="color: white;">Regresar</a></button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

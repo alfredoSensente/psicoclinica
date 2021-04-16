@@ -1,0 +1,70 @@
+{% extends "paciente/paciente_layout_base.html"%}
+{% block title %}Resultados de la Busqueda{% endblock %}
+{% load static %}
+{% block body %}
+<style>
+  
+  
+  .search_submit{
+      
+      font-size: 15px;
+     
+    }
+  
+  </style>
+<br>
+<div class="container">
+   
+    <h1 class="text-center">Resultados de la Búsqueda</h1>
+    <!--SearchBox con su respectivo Botón-->
+<div class="text-right">
+<form action="{% url 'paciente:paciente_busqueda' %}"  method="get">
+    <input name="q" type="text" placeholder="Buscar paciente...">
+    <button id="search_submit" type="submit reset" class="btn btn-dark search_submit">Buscar</button>
+</form>
+</div>
+
+<br>
+        <div class="row justify-content-md-center text-right">
+            <button class="button button2 align-right"><a href="{% url 'paciente:paciente_index' %}" style="color: white;">Regresar</a></button>
+        </div>
+ <!--Tabla-->
+    {% if object_list %}
+    <table class="table table-bordered text-center table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">No. Correlativo</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Contacto</th>
+            <th scope="col">Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+
+    {% for paciente in object_list %}
+        
+    <tr>
+      <th scope="row">{{paciente.id_paciente}}</th>
+      <td>{{paciente.nombre}}</td>
+      <td>{{paciente.apellido}}</td>
+      <td>{{paciente.departamento}}</td>
+      <td>{{empleado.id_numero_contacto}}</td>
+      <td><a href="{% url 'paciente:paciente_descripcion' paciente.id_paciente %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
+          <a href="{% url 'paciente:paciente_editar' paciente.id_paciente %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+
+      </td>
+    </tr>
+    {% endfor %}
+{% else %}
+<div class="text-center">
+<h1>No hay coincidencias!</h1>
+<img src="{% static 'img\rocket.gif' %}" alt="cohete">
+
+</div>
+{% endif %}
+</tbody>
+</table>
+    </div>
+{% endblock %}
