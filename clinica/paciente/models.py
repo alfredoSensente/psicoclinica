@@ -16,6 +16,7 @@ class Sexo(models.Model):
     class Meta:
         db_table = 'sexo'
 
+
 class Religion(models.Model):
     """Religión"""
     id_religion = models.AutoField(primary_key=True)
@@ -28,6 +29,7 @@ class Religion(models.Model):
     class Meta:
         db_table = 'religion'
 
+
 class EstadoCivil(models.Model):
     """Estado Civil"""
     id_estado_civil = models.AutoField(primary_key=True)
@@ -38,6 +40,7 @@ class EstadoCivil(models.Model):
 
     class Meta:
         db_table = 'estado_civil'
+
 
 class TipoFamiliar(models.Model):
     """Tipo Familiar"""
@@ -50,6 +53,7 @@ class TipoFamiliar(models.Model):
     class Meta:
         db_table = 'tipo_familiar'
 
+
 class NumeroContacto(models.Model):
     """Numero de Contacto"""
     id_numeros_de_contacto = models.AutoField(primary_key=True)
@@ -61,6 +65,7 @@ class NumeroContacto(models.Model):
 
     class Meta:
         db_table = 'numero_contacto'
+
 
 class Paciente(models.Model):
     """paciente"""
@@ -88,7 +93,8 @@ class Paciente(models.Model):
 
     class Meta:
         db_table = 'paciente'
-        unique_together = (('id_paciente', 'id_numero_contacto', 'id_religion', 'id_estado_civil', 'id_sexo'),)
+        unique_together = (('id_paciente', 'id_numero_contacto', 'id_religion',
+                            'id_estado_civil', 'id_sexo'),)
 
 
 class Familiar(models.Model):
