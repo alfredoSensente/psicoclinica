@@ -1,4 +1,7 @@
+"""Paciente registers"""
+#Django
 from django.contrib import admin
+#Paciente models
 from .models import Sexo
 from .models import Religion
 from .models import EstadoCivil
