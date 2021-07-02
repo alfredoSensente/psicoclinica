@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'cita.apps.CitaConfig',
     #Clinica
     'paciente.apps.PacienteConfig',
-    'principal.apps.PrincipalConfig',
 ]
 
 MIDDLEWARE = [

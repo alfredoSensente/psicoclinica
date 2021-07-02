@@ -1,0 +1,96 @@
+{% extends "paciente/paciente_layout_base.html"%}
+{% block title %}Paciente{% endblock %}
+{% load static %}
+{% block body %}
+
+<div class="container margen-arriba">
+   
+    <h1 class="text-center">Tabla de Pacientes</h1>
+
+    <!--SearchBox con su respectivo Botón-->
+    <div class="text-right">
+    <form action="{% url 'paciente:paciente_busqueda' %}"  method="get">
+        <input name="q" type="text" placeholder="Buscar paciente...">
+        <button id="search_submit" type="submit reset" class="btn btn-dark search_submit">Buscar</button>
+    </form>
+    </div>
+    <!--Tabla-->
+    {% if lista_paciente %}
+    <table class="margen-arriba table table-bordered text-center table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">No. Correlativo</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Departamento</th>
+                <th scope="col">Contacto</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tablapaciente in lista_paciente %}
+            <tr>
+                <th scope="row">{{tablapaciente.id_paciente}}</th>
+                <td>{{tablapaciente.nombre}}</td>
+                <td>{{tablapaciente.apellido}}</td>
+                <td>{{tablapaciente.departamento}}</td>
+                <td>{{tablapaciente.id_numero_contacto}}</td>
+                <td>
+                    <a href="{% url 'paciente:paciente_descripcion' tablapaciente.id_paciente %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
+                    <a><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <h1 class="text-center">No hay pacientes registrados</h1>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!--Paginación-->
+    <div class="row justify-content-md-center">
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="Previous">
+                    Primera
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% ifequal num page_obj.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link current">
+                    {{ num }}
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endifequal %} 
+        {% endfor %}        
+
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Previous">
+                    Última
+                </a>
+            </li>
+        {% endif %}
+        </ul>
+    </div>
+    </div>
+{% endblock %}
